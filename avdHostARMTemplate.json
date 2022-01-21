@@ -1,0 +1,21 @@
+{
+	"apiVersion": "2018-06-01",
+    "type": "Microsoft.Compute/virtualMachines/extensions",
+	"name": "AVDHostDeploymentScript",
+	"location": "[parameters('location')]",
+	"dependsOn": [
+		"[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"
+	],
+	"properties": {
+		"publisher": "Microsoft.Compute",
+		"type": "CustomScriptExtension",
+		"typeHandlerVersion": "1.10",
+		"autoUpgradeMinorVersion":true,
+		"settings": {
+			"fileUris": [
+			"https://niswaterstorageaccount.file.core.windows.net/adminshare/avdHostScript.ps1"
+		],
+		"commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File avdHostScript.ps1"
+		}
+	}
+}
